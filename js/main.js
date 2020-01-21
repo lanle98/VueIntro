@@ -5,11 +5,7 @@ var vm = new Vue({
 
   data: {
     // mock up the user - this well eventually come from the database UMS (user management system)
-    user: {
-      isAdmin: true,
-      isLoggedIn: false,
-      avatar: null
-    },
+    user: {},
     // this data would also come from the database, but we'll just mock it up for now
     videodata: [
       {
@@ -39,6 +35,11 @@ var vm = new Vue({
     showDetails: false
   },
 
+  created: function() {
+    //vue instance is ready to go, mostly - add some live data to the VM
+    this.fetchUsers();
+  },
+
   methods: {
     logInOut() {
       // test the login / logout UI ->button should change color
@@ -59,6 +60,15 @@ var vm = new Vue({
       this.videosource = vidsource;
 
       this.showDetails = true;
+    },
+
+    fetchUsers() {
+      //get our user data and push it back to the VM
+      const url = "./includes/index.php?user=true";
+      fetch(url)
+        .then(res => res.json())
+        .then(data => (this.user = data[0]))
+        .catch(err => console.log(err));
     }
   }
 });

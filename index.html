@@ -19,7 +19,9 @@
         <h1 class="hidden">Video with Vue.js</h1>
         <nav>
           <h3 class="app-title">My Awesome Video App</h3>
+
           <ul>
+            <span :user="this.user">{{user.uname}}</span>
             <!-- avatar / user icon-->
             <!-- if the user has an avatar, show it -->
             <li v-if="user.avatar">
@@ -38,7 +40,7 @@
 
             <!-- settings icon / functionality -->
             <!-- if our user object has admin rights, then show this -->
-            <li v-if="user.isAdmin">
+            <li v-if="user.isadmin">
               <i @click="setUserPrefs" class="fas fa-cog" role="button"></i>
             </li>
             <!-- end user settings -->
